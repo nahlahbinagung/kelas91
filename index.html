@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lembar Jawaban</title>
+</head>
+<body>
+    <div class="answer-sheet-container">
+        <h2>Lembar Jawaban</h2>
+        <form id="answerForm" action="generate_pdf.php" method="post">
+            <label for="name">Nama:</label>
+            <input type="text" name="name" required>
+
+            <label for="class">Kelas:</label>
+            <input type="text" name="class" required>
+
+            <label for="examNumber">Nomer Ujian:</label>
+            <input type="text" name="examNumber" required>
+
+            <h3>Pilihan Ganda (45 soal)</h3>
+            <!-- Pilihan Ganda Soal 1-45 -->
+            <?php
+                for ($i = 1; $i <= 45; $i++) {
+                    echo "<div class='question'>";
+                    echo "<p>Soal $i:</p>";
+                    for ($j = 0; $j < 4; $j++) {
+                        $option = chr(65 + $j); // A, B, C, D
+                        echo "<label><input type='radio' name='q$i' value='$option'>$option</label>";
+                    }
+                    echo "</div>";
+                }
+            ?>
+
+            <h3>Jawaban Uraian (Max 1,000 karakter)</h3>
+            <textarea name="essayAnswer" rows="5" maxlength="1000"></textarea>
+
+            <button type="submit">Selesai</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
